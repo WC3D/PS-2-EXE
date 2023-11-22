@@ -45,3 +45,6 @@ Version: 2.0.0.0
 Changelog
 
 -Removed the .NET 3.5 version, I will only use the .NET v4.X
+-icon updated to use a darker icon Black and blue vs old White and red icon
+-updates to.CS to attempt to get the company name to appear in EXE's Properties
+-Various name changes in .CS file

@@ -61,3 +61,11 @@ Changelog:
 - Creation of NEW License file and attribution of old License File
 
 - Updates to the .gitattributes file
+
+
+### How to compile:
+Run **Compile.bat** (A .Net 4.8.1 environment is recommended for use with this version.
+https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481 
+
+### How to use:
+Ensure **PS2EXE.ps1** is in the same directory as **Win-PS2EXE.exe**.

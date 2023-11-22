@@ -1,9 +1,19 @@
+//PS_2_EXE A Modern GUI for PS2EXE
+//Being upgraded by Wil's Custom 3D 
+//
+//Project is a fork of:
 // Win-PS2EXE v1.0.1.2
 // Front-end to Powershell-Script-to-EXE-Compiler PS2EXE.ps1: https://github.com/MScholtes/TechNet-Gallery
 // Markus Scholtes, 2023
 //
+// AND Contains
+// PS2EXE v0.5.0.29
+// PowerShell Scripts to EXE Files: https://github.com/ikarstein/ps2exe
+// by Ingo Karstein, 2020
+//
 // WPF "all in one file" program, no Visual Studio or MSBuild is needed to compile
-// Version for .Net 4.x
+// Version for .NET 4.x
+// .NET 4.8.1 was used when testing this
 
 /* compile with:
 %WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe /target:winexe Win-PS2EXE.cs /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationframework.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\windowsbase.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationcore.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll" /win32icon:MScholtes.ico
@@ -21,16 +31,16 @@ using System.Xml;
 
 // set attributes
 using System.Reflection;
-[assembly:AssemblyTitle("Graphical front-end to PS2EXE.ps1")]
-[assembly:AssemblyDescription("Graphical front-end to PS2EXE.ps1")]
+[assembly:AssemblyTitle("PS_2_EXE")]
+[assembly:AssemblyDescription("NEW Graphical front-end to PS2EXE.ps1 based on Win-PS2EXE")]
 [assembly:AssemblyConfiguration("")]
-[assembly:AssemblyCompany("MS")]
-[assembly:AssemblyProduct("Win-PS2EXE")]
-[assembly:AssemblyCopyright("© Markus Scholtes 2023")]
+[assembly:AssemblyCompany("Wils Custom 3D")]
+[assembly:AssemblyProduct("PS_2_EXE")]
+[assembly:AssemblyCopyright("Wil's Custom 3D 2023")]
 [assembly:AssemblyTrademark("")]
 [assembly:AssemblyCulture("")]
-[assembly:AssemblyVersion("1.0.1.2")]
-[assembly:AssemblyFileVersion("1.0.1.2")]
+[assembly:AssemblyVersion("2.0.0.0")]
+[assembly:AssemblyFileVersion("2.0.0.0")]
 
 namespace WPFApplication
 {
@@ -146,8 +156,15 @@ namespace WPFApplication
 					arguments += " -copyright '" + objCopyright.Text + "'";
 				}
 
-				// read state of CheckBox control
-				CheckBox objCheckBox = (CheckBox)objWindow.FindName("noConsole");
+                // read content of TextBox control
+                TextBox objCompany = (TextBox)objWindow.FindName("Company");
+                if (objCopyright.Text != "")
+                {
+                    arguments += " -company '" + objCompany.Text + "'";
+                }
+
+                // read state of CheckBox control
+                CheckBox objCheckBox = (CheckBox)objWindow.FindName("noConsole");
 				if (objCheckBox.IsChecked.Value)
 				{
 					arguments += " -noConsole";
@@ -202,7 +219,7 @@ namespace WPFApplication
 					{
 						arguments += " -x64";
 					}
-					else
+                    else
 					{
 						arguments += " -x86";
 					}
@@ -360,7 +377,7 @@ namespace WPFApplication
 			if (directoryOfExecutable.StartsWith("file:\\") || directoryOfExecutable.StartsWith("http:\\")) { directoryOfExecutable = directoryOfExecutable.Substring(6); }
 			if (!System.IO.File.Exists(directoryOfExecutable + "\\ps2exe.ps1"))
 			{
-				MessageBox.Show("ps2exe.ps1 has to be in the same directory as Win-PS2EXE.exe", "Win-PS2EXE", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("ps2exe.ps1 has to be in the same directory as PS_2_EXE.exe", "PS_2_EXE", MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
@@ -370,8 +387,8 @@ namespace WPFApplication
 	xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 	xmlns:local=""clr-namespace:WPFApplication;assembly=***ASSEMBLY***""
 	xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
-	x:Name=""Window"" Title=""Win-PS2EXE"" WindowStartupLocation=""CenterScreen""
-	Background=""#FFE8E8E8""  Width=""504"" Height=""392"" ShowInTaskbar=""True"">
+	x:Name=""Window"" Title=""PS_2_EXE"" WindowStartupLocation=""CenterScreen""
+	Background=""#FFE8E8E8""  Width=""525"" Height=""425"" ShowInTaskbar=""True"">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width=""auto"" />
@@ -391,9 +408,10 @@ namespace WPFApplication
 			<RowDefinition Height=""auto"" />
 			<RowDefinition Height=""auto"" />
 			<RowDefinition Height=""auto"" />
+			<RowDefinition Height=""auto"" />
 			<RowDefinition Height=""*"" />
 		</Grid.RowDefinitions>
-		<TextBlock Height=""32"" Margin=""0,10,0,0"" FontSize=""16"" Grid.Row=""0"" Grid.Column=""1"" >Win-PS2EXE: Graphical front-end to PS2EXE</TextBlock>
+		<TextBlock Height=""32"" Margin=""0,10,0,0"" FontSize=""18"" Grid.Row=""0"" Grid.Column=""1"" >PS_2_EXE: A Modern GUI to PS2EXE</TextBlock>
 
 		<Label Grid.Row=""1"" Grid.Column=""0"">Source file: </Label>
 		<TextBox x:Name=""SourceFile"" Height=""18"" Width=""362"" Margin=""0,0,10,0"" AllowDrop=""True"" ToolTip=""Path and name of the source file (the only mandatory field)"" Grid.Row=""1"" Grid.Column=""1""
@@ -426,19 +444,25 @@ namespace WPFApplication
 			<Label Margin=""30,0,0,0"" >Copyright: </Label>
 			<TextBox x:Name=""Copyright"" Height=""18"" Width=""156"" ToolTip=""Optional: Copyright displayed in executable's properties"" />
 		</WrapPanel>
+		
+		<Label Grid.Row=""6"" Grid.Column=""0"">Company name:</Label>
+		<WrapPanel Grid.Row=""6"" Grid.Column=""1"" >
+			<TextBox x:Name=""Company"" Height=""18"" Width=""156"" Margin=""0,0,10,0"" ToolTip=""Optional: Company name displayed in executable's properties"" />
+			
+		</WrapPanel>	
 
-		<CheckBox x:Name=""noConsole"" IsChecked=""True"" Margin=""0,10,0,0"" ToolTip=""Generate a Windows application instead of a console application"" Grid.Row=""6"" Grid.Column=""1"">Compile a graphic windows program (parameter -noConsole)</CheckBox>
+		<CheckBox x:Name=""noConsole"" IsChecked=""True"" Margin=""0,10,0,0"" ToolTip=""Generate a Windows application instead of a console application"" Grid.Row=""7"" Grid.Column=""1"">Compile a graphic windows program (parameter -noConsole)</CheckBox>
 
-		<WrapPanel Grid.Row=""7"" Grid.Column=""1"" >
+		<WrapPanel Grid.Row=""8"" Grid.Column=""1"" >
 			<CheckBox x:Name=""noOutput"" IsChecked=""False"" ToolTip=""Supress any output including verbose and informational output"" >Suppress output (-noOutput)</CheckBox>
 			<CheckBox x:Name=""noError"" IsChecked=""False"" Margin=""6,0,0,0"" ToolTip=""Supress any error message including warning and debug output"" >Suppress error output (-noError)</CheckBox>
 		</WrapPanel>
 
-		<CheckBox x:Name=""requireAdmin"" IsChecked=""False"" ToolTip=""Request administrative rights (UAC) at runtime if not already present"" Grid.Row=""8"" Grid.Column=""1"">Require administrator rights at runtime (parameter -requireAdmin)</CheckBox>
+		<CheckBox x:Name=""requireAdmin"" IsChecked=""False"" ToolTip=""Request administrative rights (UAC) at runtime if not already present"" Grid.Row=""9"" Grid.Column=""1"">Require administrator rights at runtime (parameter -requireAdmin)</CheckBox>
 
-		<CheckBox x:Name=""configFile"" IsChecked=""False"" ToolTip=""Enable creation of OUTPUTFILE.exe.config"" Grid.Row=""9"" Grid.Column=""1"">Generate config file (parameter -configFile)</CheckBox>
+		<CheckBox x:Name=""configFile"" IsChecked=""False"" ToolTip=""Enable creation of OUTPUTFILE.exe.config"" Grid.Row=""10"" Grid.Column=""1"">Generate config file (parameter -configFile)</CheckBox>
 
-		<WrapPanel Grid.Row=""10"" Grid.Column=""1"" >
+		<WrapPanel Grid.Row=""11"" Grid.Column=""1"" >
 			<Label>Thread Apartment State: </Label>
 			<RadioButton x:Name=""STA"" VerticalAlignment=""Center"" IsChecked=""True"" GroupName=""ThreadAppartment"" Content=""STA"" ToolTip=""'Single Thread Apartment' mode (recommended)"" />
 			<RadioButton x:Name=""MTA"" Margin=""4,0,0,0"" VerticalAlignment=""Center"" IsChecked=""False"" GroupName=""ThreadAppartment"" Content=""MTA"" ToolTip=""'Multi Thread Apartment' mode"" />
@@ -450,10 +474,10 @@ namespace WPFApplication
 			</ComboBox>
 		</WrapPanel>
 
-		<Label Grid.Row=""11"" Grid.Column=""0"">Parameters:</Label>
-		<TextBox x:Name=""AdditionParameters"" Height=""18"" Width=""362"" Margin=""0,0,10,0"" AllowDrop=""False"" ToolTip=""Optional: Additional parameters"" Grid.Row=""11"" Grid.Column=""1"" />
+		<Label Grid.Row=""12"" Grid.Column=""0"">Parameters:</Label>
+		<TextBox x:Name=""AdditionParameters"" Height=""18"" Width=""362"" Margin=""0,0,10,0"" AllowDrop=""False"" ToolTip=""Optional: Additional parameters"" Grid.Row=""12"" Grid.Column=""1"" />
 
-		<WrapPanel Margin=""0,5,0,0"" HorizontalAlignment=""Right"" Grid.Row=""12"" Grid.Column=""1"" >
+		<WrapPanel Margin=""0,5,0,0"" HorizontalAlignment=""Right"" Grid.Row=""13"" Grid.Column=""1"" >
 			<Button x:Name=""Compile"" Background=""#FFD0D0D0"" Height=""22"" Width=""72"" Margin=""10"" Content=""Compile"" ToolTip=""Compile source file to an executable"" IsDefault=""True""
 				Click=""Button_Click"" MouseEnter=""Button_MouseEnter"" MouseLeave=""Button_MouseLeave"" />
 			<Button x:Name=""Cancel"" Background=""#FFD0D0D0"" Height=""22"" Width=""72"" Margin=""10"" Content=""Cancel"" ToolTip=""End program without action"" IsCancel=""True""

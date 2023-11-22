@@ -1,7 +1,10 @@
 This is a fork of Win-PS2EXE by Markus Scholtes. This is a graphical front end to PS1-to-EXE-compiler PS2EXE.ps1. I am making modifications that suit my use of this software while trying to provide additions to the community. 
 
+
 Forked From:
+
 Author: Markus Scholtes
+
 Version: 1.0.1.2
 
 Date: 2023-09-24
@@ -44,7 +47,8 @@ Author: Wils Custom 3D
 
 Version: 2.0.0.0
 
-Changelog
+Changelog:
+
 
 -Removed the .NET 3.5 version, I will only use the .NET v4.X
 
@@ -53,3 +57,7 @@ Changelog
 -updates to.CS to attempt to get the company name to appear in EXE's Properties
 
 -Various name changes in .CS file
+
+- Creation of NEW License file and attribution of old License File
+
+- Updates to the .gitattributes file

@@ -6,7 +6,7 @@ setlocal
 set COMPILER=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe
 if NOT EXIST "%COMPILER%" echo C# compiler not found&goto :READY
 
-"%COMPILER%" /target:winexe "%~dp0Win-PS2EXE.cs" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationframework.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\windowsbase.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationcore.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll" /win32icon:"%~dp0MScholtes.ico"
+"%COMPILER%" /target:winexe "%~dp0Win-PS2EXE.cs" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationframework.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\windowsbase.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationcore.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll" /win32icon:"%~dp0PS_2_EXE.ico"
 
 :READY
 :: was batch started in Windows Explorer? Yes, then pause

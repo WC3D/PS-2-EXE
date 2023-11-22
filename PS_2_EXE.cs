@@ -1,5 +1,6 @@
 //PS_2_EXE A Modern GUI for PS2EXE
-//Being upgraded by Wil's Custom 3D 
+//Being upgraded by Wil's Custom 3D
+//Version 2.0.0.0
 //
 //Project is a fork of:
 // Win-PS2EXE v1.0.1.2
@@ -16,7 +17,7 @@
 // .NET 4.8.1 was used when testing this
 
 /* compile with:
-%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe /target:winexe Win-PS2EXE.cs /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationframework.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\windowsbase.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationcore.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll" /win32icon:MScholtes.ico
+%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe /target:winexe PS_2_EXE.cs /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationframework.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\windowsbase.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\WPF\presentationcore.dll" /r:"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll" /win32icon:MScholtes.ico
 */
 
 using System;
@@ -444,12 +445,12 @@ namespace WPFApplication
 			<Label Margin=""30,0,0,0"" >Copyright: </Label>
 			<TextBox x:Name=""Copyright"" Height=""18"" Width=""156"" ToolTip=""Optional: Copyright displayed in executable's properties"" />
 		</WrapPanel>
-		
+
 		<Label Grid.Row=""6"" Grid.Column=""0"">Company name:</Label>
 		<WrapPanel Grid.Row=""6"" Grid.Column=""1"" >
 			<TextBox x:Name=""Company"" Height=""18"" Width=""156"" Margin=""0,0,10,0"" ToolTip=""Optional: Company name displayed in executable's properties"" />
-			
-		</WrapPanel>	
+
+		</WrapPanel>
 
 		<CheckBox x:Name=""noConsole"" IsChecked=""True"" Margin=""0,10,0,0"" ToolTip=""Generate a Windows application instead of a console application"" Grid.Row=""7"" Grid.Column=""1"">Compile a graphic windows program (parameter -noConsole)</CheckBox>
 
